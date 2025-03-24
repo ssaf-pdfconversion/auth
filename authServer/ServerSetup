@@ -1,0 +1,61 @@
+Develop a java auth server for a distributed system:
+
+1. Using a maven project (if youre using eclipse: ben maven-archetype-sim con el catalogo de Maven Central y seleccionan el ultimo q aparece. Dice org.maven.archetypes)
+
+2. add the dependencies on the .pom file:
+
+
+for the .env: 
+<dependency>
+    <groupId>io.github.cdimascio</groupId>
+    <artifactId>java-dotenv</artifactId>
+    <version>5.2.2</version>
+</dependency>
+
+
+for mariadb:
+
+<dependency>
+    <groupId>org.mariadb.jdbc</groupId>
+    <artifactId>mariadb-java-client</artifactId>
+    <version>3.0.7</version> <!-- use the latest version available -->
+</dependency>
+
+Then, we do the environment for the .env (you get it? environment for the env? Gold comedy)
+
+we create the .env with your db creeds (usual #stuff)
+
+example!!
+
+DB_URL=jdbc:mariadb://localhost:3306/your_database
+DB_USER=your_username
+DB_PASSWORD=your_password
+
+
+then we create the java class for the connection!! In this case, its called DBManager bc we manage the db with it.
+
+Now thats set, lets do our queries!! here we're creating an auth server so we're creating a login and register queries 
+for the DB. For best practices, we'll create the queries in one class and then use them on a factory class that implements
+ the validation methods and everything!!
+
+
+**NOTE: I did a refactor of the code for better understanding. There are three more folders. 
+1.Utils which contains functions that are used across classes.
+2. Interfaces (for the interfaces used for connecting the project via distributed systems, also just the interfaces for implementing things.)
+3. Models, which contains business logic. 
+
+its better this way so we can find files easily!!
+
+**************
+First, we do the Register model. We need to hash the password for better security, so we use a library called Bcrypt. The maven dependency is 
+
+<dependency>
+    <groupId>at.favre.lib</groupId>
+    <artifactId>bcrypt</artifactId>
+    <version>0.10.2</version>
+</dependency>
+
+but, before getting involved with hash and everything lets do a test with plain text.
+
+
+
