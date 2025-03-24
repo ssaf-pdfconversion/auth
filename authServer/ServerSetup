@@ -57,5 +57,14 @@ First, we do the Register model. We need to hash the password for better securit
 
 but, before getting involved with hash and everything lets do a test with plain text.
 
+now that we tried (instancing the model on the main) and the data was added to the db, we tried to add the hash.
+
+now, we do the controller. Here we instance the model and add error handling!!
+
+We defined that we wanted an RMI server. So, lets do that. For the RMI server we need to adjust the interface, adding the methods that we
+did prior. We need the controller to use the interface, so we assure that the methods are the ones we need as a system.
+
+After that, we do the RMI server and the View. 
+
 
 

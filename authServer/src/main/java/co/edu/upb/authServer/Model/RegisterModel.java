@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import co.edu.upb.authServer.utils.DBManager;
 
 public class RegisterModel {
@@ -27,14 +29,20 @@ public class RegisterModel {
 	  
 	  public boolean registerUser() {
 	        
+		  
+		  	
+		  
+		  
 	        String sql = "INSERT INTO USUARIO (username, password, nombre, apellido, email) VALUES (?, ?, ?, ?, ?)";
+	        
+	        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12)); 
 	        
 	        
 	        try (Connection connection = db.getConnection();
 	             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 	            
 	            preparedStatement.setString(1, username);
-	            preparedStatement.setString(2, password);
+	            preparedStatement.setString(2, hashedPassword);
 	            preparedStatement.setString(3, nombre);
 	            preparedStatement.setString(4, apellido);
 	            preparedStatement.setString(5, email);
