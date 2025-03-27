@@ -7,5 +7,5 @@ public interface InterfaceAuth extends Remote {
 
 	public String register(String username, String password, String nombre, String apellido, String email) throws RemoteException;
 	public String login(String username, String password) throws RemoteException;
-
+	public String validateJWT(String JWT);
 }
