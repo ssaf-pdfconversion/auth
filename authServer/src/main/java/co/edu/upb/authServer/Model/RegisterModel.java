@@ -51,7 +51,7 @@ public class RegisterModel {
 	            
 	            db.closeConnection(connection);
 	            
-	            //need to change the return method to an object with a message. 
+	            
 	            return rowsAffected > 0;
 	        } catch (SQLException e) {
 	            System.err.println("Error registering user: " + e.getMessage());

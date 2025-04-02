@@ -12,14 +12,15 @@ public class AppResponse<DataType> implements Serializable {
     private DataType data;
 
     
-    public AppResponse(boolean success, String message, DataType data) {
+    public AppResponse(DataType data, String message, boolean success) {
         this.success = success;
         this.message = message;
         this.data = data;
     }
 
     
-    public boolean isSuccess() {
+
+	public boolean isSuccess() {
         return success;
     }
 

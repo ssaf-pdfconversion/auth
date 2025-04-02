@@ -20,7 +20,10 @@ public class ControllerAuth extends UnicastRemoteObject implements InterfaceAuth
 
     @Override
     public AppResponse<String> login(String username, String password) throws RemoteException {
-        return null;
+    	ZonedDateTime now = ZonedDateTime.now();
+		 
+		 AppResponse<String>  response = new AppResponse<String>("Holis", "Servidor autenticación respondió a las: "+ now.format(formatter), true);
+		 return response;
     }
 
     @Override
@@ -33,23 +36,25 @@ public class ControllerAuth extends UnicastRemoteObject implements InterfaceAuth
             
             if (isRegistered) {
             	 ZonedDateTime now = ZonedDateTime.now();
-            	AppResponse<String> response = new AppResponse<String>(true, "Registro exitoso a las "+ now.format(formatter), "Prueba");
+            	AppResponse<String> response = new AppResponse<String>("Prueba", "Registro exitoso a las "+ now.format(formatter), true);
                 return response;
             } else {
             	 ZonedDateTime now = ZonedDateTime.now();
-            	AppResponse<String> response = new AppResponse<String>(false, "Registro fallido a las "+ now.format(formatter), "Prueba");
+            	AppResponse<String> response = new AppResponse<String>("Prueba", "Registro fallido a las "+ now.format(formatter), false);
                 return response;
             }
         } catch (Exception e) {
-            
+           
             throw new RemoteException("Registration error: " + e.getMessage(), e);
         }
     }
 
 	@Override
 	public AppResponse<Boolean> validateJWT(String JWT) {
-		
-		return null;
+		ZonedDateTime now = ZonedDateTime.now();
+		 System.out.println("Server app envió solicitud a las:  "+ now.format(formatter));
+		 AppResponse<Boolean>  response = new AppResponse<Boolean>(false, "Servidor autenticación respondió a las: "+ now.format(formatter), true);
+		 return response;
 	}
     
     
