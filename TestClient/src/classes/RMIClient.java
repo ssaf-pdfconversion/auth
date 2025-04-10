@@ -15,7 +15,7 @@ public class RMIClient {
 
 	    public RMIClient(String address, int port) {
 	        
-	        this.addressName = "rmi://127.0.0.1:6969/auth";
+	        this.addressName = "rmi://192.168.1.20:6969/auth";
 	    }
 
 	
@@ -24,7 +24,7 @@ public class RMIClient {
 		
 		try {
 			InterfaceAuth service = (InterfaceAuth) Naming.lookup(this.addressName);
-			service.register("dan123", "dan", "dan", "dan", "dan");
+			service.login("admin", "admin");
 			
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
             e.printStackTrace();

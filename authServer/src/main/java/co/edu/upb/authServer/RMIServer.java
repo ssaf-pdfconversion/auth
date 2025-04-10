@@ -22,7 +22,14 @@ public class RMIServer {
         try {
             LocateRegistry.createRegistry(6969);
             try {
-                Naming.rebind("//127.0.0.1:6969/auth", service);
+            	 System.setProperty("java.rmi.server.hostname", "192.168.1.20");
+                 
+                 
+                 LocateRegistry.createRegistry(port);
+                 
+                 
+                 Naming.rebind("//192.168.1.20:" + port + "/auth", service);
+                 System.out.println("Service bound to //192.168.1.20:" + port + "/auth");
             } catch (RemoteException | MalformedURLException e) {
                 e.printStackTrace();
             }
