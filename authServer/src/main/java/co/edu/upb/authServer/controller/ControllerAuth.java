@@ -21,7 +21,7 @@ public class ControllerAuth extends UnicastRemoteObject implements InterfaceAuth
     @Override
     public AppResponse<String> login(String username, String password) throws RemoteException {
     	ZonedDateTime now = ZonedDateTime.now();
-		 
+    	System.out.println("Server app envió solicitud a las:  "+ now.format(formatter));
 		 AppResponse<String>  response = new AppResponse<String>("Holis", "Servidor autenticación respondió a las: "+ now.format(formatter), true);
 		 return response;
     }
