@@ -19,8 +19,6 @@ public class RMIServer {
     }
 
     public void listening() {
-        try {
-            LocateRegistry.createRegistry(6969);
             try {
             	 System.setProperty("java.rmi.server.hostname", "192.168.1.20");
                  
@@ -32,7 +30,7 @@ public class RMIServer {
                  System.out.println("Service bound to //192.168.1.20:" + port + "/auth");
             } catch (RemoteException | MalformedURLException e) {
                 e.printStackTrace();
-            }
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
