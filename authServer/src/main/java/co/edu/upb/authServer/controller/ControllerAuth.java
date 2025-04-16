@@ -7,7 +7,9 @@ import java.time.format.DateTimeFormatter;
 
 import co.edu.upb.app.domain.models.AppResponse;
 import co.edu.upb.authServer.Interfaces.InterfaceAuth;
+import co.edu.upb.authServer.Model.LoginModel;
 import co.edu.upb.authServer.Model.RegisterModel;
+import co.edu.upb.authServer.Model.ValidateModel;
 
 public class ControllerAuth extends UnicastRemoteObject implements InterfaceAuth {
 
@@ -20,10 +22,26 @@ public class ControllerAuth extends UnicastRemoteObject implements InterfaceAuth
 
     @Override
     public AppResponse<String> login(String username, String password) throws RemoteException {
-    	ZonedDateTime now = ZonedDateTime.now();
-    	System.out.println("Server app envió solicitud a las:  "+ now.format(formatter));
-		 AppResponse<String>  response = new AppResponse<String>("Holis", "Servidor autenticación respondió a las: "+ now.format(formatter), true);
-		 return response;
+    	
+    	System.out.println("Server app envió solicitud de login");
+    	
+    	LoginModel loginModel = new LoginModel(username, password);
+    	String token = loginModel.loginUser();
+    	
+    	if (token != null) {
+			ZonedDateTime now = ZonedDateTime.now();
+			AppResponse<String> response = new AppResponse<String>(token, "Login exitoso a las: "+ now.format(formatter), true);
+			System.out.println(response.getMessage().toString());
+			System.out.println(response.getData().toString());
+			return response;
+		} else {
+			ZonedDateTime now = ZonedDateTime.now();
+			AppResponse<String> response = new AppResponse<String>("No token", "Login fallido a las: "+ now.format(formatter) +" error con las credenciales.", false);
+			System.out.println(response.getMessage().toString());
+			return response;
+		}
+    	
+    	
     }
 
     @Override
@@ -31,16 +49,19 @@ public class ControllerAuth extends UnicastRemoteObject implements InterfaceAuth
         try {
         	
         	
+        	System.out.println("Server app envió solicitud de registro.");
             RegisterModel registerModel = new RegisterModel(username, password, nombre, apellido, email);
             boolean isRegistered = registerModel.registerUser();
             
             if (isRegistered) {
             	 ZonedDateTime now = ZonedDateTime.now();
             	AppResponse<String> response = new AppResponse<String>("Prueba", "Registro exitoso a las "+ now.format(formatter), true);
+            	System.out.println(response.getMessage().toString());
                 return response;
             } else {
             	 ZonedDateTime now = ZonedDateTime.now();
             	AppResponse<String> response = new AppResponse<String>("Prueba", "Registro fallido a las "+ now.format(formatter), false);
+            	System.out.println(response.getMessage().toString());
                 return response;
             }
         } catch (Exception e) {
@@ -51,10 +72,23 @@ public class ControllerAuth extends UnicastRemoteObject implements InterfaceAuth
 
 	@Override
 	public AppResponse<Boolean> validateJWT(String JWT) {
-		ZonedDateTime now = ZonedDateTime.now();
-		 System.out.println("Server app envió solicitud a las:  "+ now.format(formatter));
-		 AppResponse<Boolean>  response = new AppResponse<Boolean>(false, "Servidor autenticación respondió a las: "+ now.format(formatter), true);
-		 return response;
+		
+		System.out.println("Server app envió solicitud de validación de token.");
+		ValidateModel validateModel = new ValidateModel();
+		boolean isValid = validateModel.validateJWT(JWT);
+		if (isValid) {
+			ZonedDateTime now = ZonedDateTime.now();
+			System.out.println("Token válido a las: "+ now.format(formatter));
+			AppResponse<Boolean>  response = new AppResponse<Boolean>(true, "Token válido a las: "+ now.format(formatter), true);
+			return response;
+		} else {
+			ZonedDateTime now = ZonedDateTime.now();
+			System.out.println("Token inválido a las: "+ now.format(formatter));
+			AppResponse<Boolean>  response = new AppResponse<Boolean>(false, "Token inválido a las: "+ now.format(formatter), false);
+			return response;
+		}
+		 
+		 
 	}
     
     

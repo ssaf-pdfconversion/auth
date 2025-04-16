@@ -11,20 +11,19 @@ public class DBManager {
 	
 	public Connection getConnection(){
 		
-		Dotenv dotenv = Dotenv.load();
-	    String dbUrl = dotenv.get("DB_URL");
-	    String dbUser = dotenv.get("DB_USER");
-	    String dbPassword = dotenv.get("DB_PASSWORD");
+	    String dbUrl = Environment.getInstance().getDotenv().get("DB_URL");
+	    String dbUser = Environment.getInstance().getDotenv().get("DB_USER");
+	    String dbPassword = Environment.getInstance().getDotenv().get("DB_PASSWORD");
 	  
 		
 	    try {
 	        
 	        Connection connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
-	        System.out.println("Connection established successfully! :)");
+	        System.out.println("Connection established successfully with the Database! :)");
 	        return connection;
 	        
 	    } catch (SQLException e) {
-	        System.err.println("Connection failed: " + e.getMessage());
+	        System.err.println("Connection failed with the Database: " + e.getMessage());
 	        e.printStackTrace();
 	        return null;
 	    }
@@ -35,9 +34,9 @@ public class DBManager {
 		
 		try {
 			 connection.close();
-			 System.out.println("Connection closed.");
+			 System.out.println("Connection closed with the Database.");
 		}catch (SQLException e) {
-	        System.err.println("Failed to close the connection:( " + e.getMessage());
+	        System.err.println("Failed to close the connection with the Database:( " + e.getMessage());
 	        e.printStackTrace();
 	       
 	    }
