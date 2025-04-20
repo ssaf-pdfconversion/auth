@@ -4,7 +4,7 @@ public class Principal {
 
 	public static void main(String[] args) {
 		
-		Client client = new Client("127.0.0.1", 6969);
+		Client client = new Client("192.168.1.20", 6969);
         client.operation();
 	}
 
