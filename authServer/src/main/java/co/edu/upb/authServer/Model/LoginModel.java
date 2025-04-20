@@ -23,7 +23,7 @@ public class LoginModel {
   
     public String loginUser() {
         
-        String sql = "SELECT idusuario, password FROM USUARIO WHERE username = ?";
+        String sql = "SELECT IDUSUARIO, PASSWORD FROM USUARIO WHERE USERNAME = ?";
 
         try (Connection connection = db.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -33,8 +33,8 @@ public class LoginModel {
             
             if (resultSet.next()) {
                
-                int userId = resultSet.getInt("idusuario");
-                String hashedPassword = resultSet.getString("password");
+                int userId = resultSet.getInt("IDUSUARIO");
+                String hashedPassword = resultSet.getString("PASSWORD");
                 
                
                 if (BCrypt.checkpw(password, hashedPassword)) {

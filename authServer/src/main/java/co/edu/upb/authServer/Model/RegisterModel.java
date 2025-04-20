@@ -33,7 +33,7 @@ public class RegisterModel {
 		  	
 		  
 		  
-	        String sql = "INSERT INTO USUARIO (username, password, nombre, apellido, email) VALUES (?, ?, ?, ?, ?)";
+	        String sql = "INSERT INTO USUARIO (USERNAME, PASSWORD, NOMBRE, APELLIDO, EMAIL) VALUES (?, ?, ?, ?, ?)";
 	        
 	        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12)); 
 	        
