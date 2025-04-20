@@ -11,7 +11,7 @@ public class Principal {
 			
 			AuthView server = new AuthView(6969);
 	        server.run();
-	        
+	        System.out.println("Server is running");
 	        ControllerAuth controller = new ControllerAuth();
 	        
 	        //controller.register("hola", "hola", "hola", "hola", "hola");
