@@ -14,8 +14,8 @@ public class Principal {
 	        
 	        ControllerAuth controller = new ControllerAuth();
 	        
-	        controller.register("hola", "hola", "hola", "hola", "hola");
-	        controller.login("hola", "hola");
+	        //controller.register("hola", "hola", "hola", "hola", "hola");
+	        //controller.login("hola", "hola");
 	        
 			
 			
