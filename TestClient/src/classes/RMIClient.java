@@ -25,6 +25,7 @@ public class RMIClient {
 		try {
 			InterfaceAuth service = (InterfaceAuth) Naming.lookup(this.addressName);
 			service.login("admin", "admin");
+			service.register("admin", "admin", "admin", "admin", "admin");
 			
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
             e.printStackTrace();
