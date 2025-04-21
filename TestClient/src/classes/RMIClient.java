@@ -15,7 +15,7 @@ public class RMIClient {
 
 	    public RMIClient(String address, int port) {
 	        
-	        this.addressName = "rmi://192.168.1.20:6969/auth";
+	        this.addressName = "rmi://192.168.180.208:6969/auth";
 	    }
 
 	
