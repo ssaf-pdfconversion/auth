@@ -9,7 +9,7 @@ public class Environment {
     private Dotenv dotenv;
 
     private Environment() {
-        String configDir = System.getProperty("config.dir", "/home/auth/authServer/environment");
+        String configDir = System.getProperty("config.dir", "/home/auth/environment");
     	//String configDir = System.getProperty("config.dir", "C:\\UPB\\08\\distribuidos\\Proyecto_PDF\\auth\\authServer\\environment");
         dotenv = Dotenv.configure()
                 .directory(configDir)
